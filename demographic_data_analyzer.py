@@ -35,6 +35,9 @@ def calculate_demographic_data(print_data=True):
         lambda x: (x == '>50K').mean() * 100
     )
     country_earning = country_earning.groupby(df['native-country']).first()
+    
+    # Encuentra el país con el mayor porcentaje de ricos
+    highest_earning_country = country_earning.idxmax()
     highest_earning_country_percentage = round(country_earning.max(), 1)  # Redondear a 1 decimal
     
     top_IN_occupation = df[(df['native-country'] == 'India') & (df['salary'] == '>50K')]['occupation'].mode()[0]
@@ -64,4 +67,3 @@ def calculate_demographic_data(print_data=True):
         'highest_earning_country_percentage': highest_earning_country_percentage,
         'top_IN_occupation': top_IN_occupation
     }
-
